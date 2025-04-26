@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lectorum - Réseau social pour passionnés de lecture</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#4361ee',secondary:'#3f72af'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9fafb;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c5c5c5;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #a0a0a0;
+        }
+        .rating input {
+            display: none;
+        }
+        .rating label {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barre de Navigation -->
+    <header class="bg-white shadow-sm fixed top-0 left-0 right-0 z-50">
+        <div class="px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <a href="#" class="text-2xl font-['Pacifico'] text-primary">Lectorum</a>
+            </div>
+            
+            <!-- Barre de recherche -->
+            <div class="flex-1 max-w-xl mx-4">
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <div class="w-5 h-5 flex items-center justify-center text-gray-400">
+                            <i class="ri-search-line"></i>
+                        </div>
+                    </div>
+                    <input type="text" class="block w-full bg-gray-50 border-none rounded-full pl-10 pr-4 py-2 text-sm text-gray-900 focus:ring-2 focus:ring-primary focus:outline-none" placeholder="Rechercher des livres, auteurs, clubs...">
+                </div>
+            </div>
+            
+            <!-- Menu utilisateur -->
+            <div class="flex items-center space-x-4">
+                <button class="bg-primary text-white px-4 py-2 rounded-button flex items-center !rounded-button whitespace-nowrap">
+                    <div class="w-4 h-4 flex items-center justify-center mr-1">
+                        <i class="ri-add-line"></i>
+                    </div>
+                    <span>Créer</span>
+                </button>
+                
+                <div class="relative">
+                    <button class="w-10 h-10 flex items-center justify-center text-gray-500 hover:bg-gray-100 rounded-full relative">
+                        <i class="ri-message-3-line ri-lg"></i>
+                        <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                    </button>
+                </div>
+                
+                <div class="relative">
+                    <button class="w-10 h-10 flex items-center justify-center text-gray-500 hover:bg-gray-100 rounded-full relative">
+                        <i class="ri-notification-3-line ri-lg"></i>
+                        <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                    </button>
+                </div>
+                
+                <div class="relative">
+                    <button class="w-10 h-10 overflow-hidden rounded-full border-2 border-primary">
+                        <img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20a%20young%20French%20woman%20with%20short%20brown%20hair%2C%20natural%20makeup%2C%20warm%20smile%2C%20looking%20directly%20at%20camera%2C%20soft%20lighting%2C%20neutral%20background%2C%20high%20quality%2C%20photorealistic&width=200&height=200&seq=profile1&orientation=squarish" alt="Photo de profil" class="w-full h-full object-cover">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenu Principal -->
+    <div class="pt-16 min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex gap-6">
+                <!-- Colonne de Gauche (Navigation) -->
+                <div class="w-64 hidden lg:block">
+                    <div class="bg-white rounded shadow-sm p-4 mb-6">
+                        <div class="flex flex-col items-center mb-4">
+                            <div class="w-20 h-20 rounded-full overflow-hidden mb-3">
+                                <img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20a%20young%20French%20woman%20with%20short%20brown%20hair%2C%20natural%20makeup%2C%20warm%20smile%2C%20looking%20directly%20at%20camera%2C%20soft%20lighting%2C%20neutral%20background%2C%20high%20quality%2C%20photorealistic&width=200&height=200&seq=profile1&orientation=squarish" alt="Photo de profil" class="w-full h-full object-cover">
+                            </div>
+                            <h3 class="font-medium text-gray-900">Sophie Mercier</h3>
+                            <p class="text-sm text-gray-500">@sophielecture</p>
+                        </div>
+                        
+                        <div class="flex justify-between text-center py-3 border-t border-b border-gray-100 mb-4">
+                            <div>
+                                <p class="font-semibold text-gray-900">127</p>
+                                <p class="text-xs text-gray-500">Livres</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-900">348</p>
+                                <p class="text-xs text-gray-500">Abonnés</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-900">214</p>
+                                <p class="text-xs text-gray-500">Suivis</p>
+                            </div>
+                        </div>
+                        
+                        <nav>
+                            <ul class="space-y-1">
+                                <li>
+                                    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-md bg-primary bg-opacity-10 text-primary">
+                                        <div class="w-5 h-5 flex items-center justify-center mr-3">
+                                            <i class="ri-home-line"></i>
+                                        </div>
+                                        Fil d'actualité
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-50">
+                                        <div class="w-5 h-5 flex items-center justify-center mr-3">
+                                            <i class="ri-book-line"></i>
+                                        </div>
+                                        Ma bibliothèque
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-50">
+                                        <div class="w-5 h-5 flex items-center justify-center mr-3">
+                                            <i class="ri-team-line"></i>
+                                        </div>
+                                        Clubs de lecture
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-50">
+                                        <div class="w-5 h-5 flex items-center justify-center mr-3">
+                                            <i class="ri-star-line"></i>
+                                        </div>
+                                        Critiques
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-50">
+                                        <div class="w-5 h-5 flex items-center justify-center mr-3">
+                                            <i class="ri-bookmark-line"></i>
+                                        </div>
+                                        Lectures en cours
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    
+                    <div class="bg-white rounded shadow-sm p-4">
+                        <h3 class="font-medium text-gray-900 mb-3">Statistiques de lecture</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-600">Livres lus en 2025</span>
+                                    <span class="text-gray-900 font-medium">18/50</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-primary h-2 rounded-full" style="width: 36%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-600">Pages ce mois-ci</span>
+                                    <span class="text-gray-900 font-medium">843/1000</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-primary h-2 rounded-full" style="width: 84%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-600">Critiques publiées</span>
+                                    <span class="text-gray-900 font-medium">24</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Flux Central (Contenu Principal) -->
+                <div class="flex-1 min-w-0">
+                    <div class="bg-white rounded shadow-sm mb-6">
+                        <div class="px-4 py-3 border-b border-gray-100">
+                            <div class="flex overflow-x-auto pb-1 -mb-1 space-x-1">
+                                <button class="px-4 py-2 text-sm font-medium rounded-full bg-primary text-white whitespace-nowrap">Pour vous</button>
+                                <button class="px-4 py-2 text-sm font-medium rounded-full text-gray-700 hover:bg-gray-100 whitespace-nowrap">Suivis</button>
+                                <button class="px-4 py-2 text-sm font-medium rounded-full text-gray-700 hover:bg-gray-100 whitespace-nowrap">Clubs</button>
+                                <button class="px-4 py-2 text-sm font-medium rounded-full text-gray-700 hover:bg-gray-100 whitespace-nowrap">Nouveautés</button>
+                                <button class="px-4 py-2 text-sm font-medium rounded-full text-gray-700 hover:bg-gray-100 whitespace-nowrap">Critiques</button>
+                            </div>
+                        </div>
+                        
+                        <div class="p-4">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <div class="w-10 h-10 rounded-full overflow-hidden">
+                                    <img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20a%20young%20French%20woman%20with%20short%20brown%20hair%2C%20natural%20makeup%2C%20warm%20smile%2C%20looking%20directly%20at%20camera%2C%20soft%20lighting%2C%20neutral%20background%2C%20high%20quality%2C%20photorealistic&width=200&height=200&seq=profile1&orientation=squarish" alt="Photo de profil" class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex-1">
+                                    <input type="text" class="w-full border-none bg-gray-50 rounded-full px-4 py-2 text-sm" placeholder="Partagez vos pensées sur votre lecture actuelle...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Posts -->
+                    <div class="space-y-6">
+                        <!-- Post 1 -->
+                        <div class="bg-white rounded shadow-sm">
+                            <div class="p-4">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <div class="w-10 h-10 rounded-full overflow-hidden">
+                                        <img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20a%20French%20man%20in%20his%2030s%20with%20glasses%20and%20a%20beard%2C%20casual%20smart%20attire%2C%20neutral%20studio%20background%2C%20high%20quality%2C%20photorealistic&width=200&height=200&seq=profile2&orientation=squarish" alt="Photo de profil" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-900">Thomas Lefevre</h4>
+                                        <p class="text-xs text-gray-500">Il y a 2 heures · Club des Classiques</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <p class="text-gray-800 mb-3">Je viens de terminer "Les Misérables" de Victor Hugo et je suis complètement bouleversé par la profondeur des personnages. L'histoire de Jean Valjean est un chef-d'œuvre sur la rédemption et la justice sociale. Qui l'a déjà lu ?</p>
+                                    <div class="flex items-start space-x-4">
+                                        <div class="w-20 h-28 rounded overflow-hidden flex-shrink-0">
+                                            <img src="https://readdy.ai/api/search-image?query=book%20cover%20of%20Les%20Miserables%20by%20Victor%20Hugo%2C%20classic%20French%20literature%2C%20vintage%20style%2C%20detailed%20illustration%2C%20high%20quality&width=200&height=280&seq=book1&orientation=portrait" alt="Couverture du livre" class="w-full h-full object-cover">
+                                        </div>
+                                        <div>
+                                            <h5 class="font-medium text-gray-900">Les Misérables</h5>
+                                            <p class="text-sm text-gray-600">Victor Hugo</p>
+                                            <div class="flex items-center mt-1">
+                                                <div class="flex text-yellow-400">
+                                                    <div class="w-4 h-4 flex items-center justify-center">
+                                                        <i class="ri-star-fill"></i>
+                                                    </div>
+                                                    <div class="w-4 h-4 flex items-center justify-center">
+                                                        <i class="ri-star-fill"></i>
+                                                    </div>
+                                                    <div class="w-4 h-4 flex items-center justify-center">
+                                                        <i class="ri-star-fill"></i>
+                                                    </div>
+                                                    <div class="w-4 h-4 flex items-center justify-center">
+                                                        <i class="ri-star-fill"></i>
+                                                    </div>
+                                                    <div class="w-4 h-4 flex items-center justify-center">
+                                                        <i class="ri-star-half-fill"></i>
+                                                    </div>
+                                                </div>
+                                                <span class="text-xs text-gray-500 ml-1">4.5/5</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                                    <div class="flex space-x-4">
+                                        <button class="flex items-center text-gray-500 hover:text-primary">
+                                            <div class="w-5 h-5 flex items-center justify-center mr-1">
+                                                <i class="ri-heart-line"></i>
+                                            </div>
+                                            <span class="text-sm">42</span>
+                                        </button>
+                                        <button class="flex items-center text-gray-500 hover:text-primary">
+                                            <div class="w-5 h-5 flex items-center justify-center mr-1">
+                                                <i class="ri-chat-1-line"></i>
+                                            </div>
+                                            <span class="text-sm">12</span>
+                                        </button>
+                                    </div>
+                                    <button class="flex items-center text-gray-500 hover:text-primary">
+                                        <div class="w-5 h-5 flex items-center justify-center mr-1">
+                                            <i class="ri-share-line"></i>
+                                        </div>
+                                        <span class="text-sm">Partager</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="px-4 py-3 bg-gray-50 rounded-b">
+                                <div class="flex items-start space-x-3 mb-3">
+                                 
